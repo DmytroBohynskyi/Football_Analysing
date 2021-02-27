@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+
+  db:
+    build: ./db
+    container_name: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: football
+      POSTGRES_PASSWORD: example
+      POSTGRES_DB: football
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
