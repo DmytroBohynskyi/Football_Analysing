@@ -6,7 +6,8 @@ CREATE TABLE Countries
 );
 
 INSERT INTO Countries (label)
-VALUES ('poland'), ('england');
+VALUES ('poland'),
+       ('england');
 ----------- END Countries -----------
 
 ------------- League -------------

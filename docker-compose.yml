@@ -9,9 +9,9 @@ services:
     ports:
       - 5432:5432
     environment:
-      POSTGRES_USER: football
-      POSTGRES_PASSWORD: example
-      POSTGRES_DB: football
+      POSTGRES_USER: "${DB_user}"
+      POSTGRES_PASSWORD: "${DB_password}"
+      POSTGRES_DB: "${DB_database}"
     volumes:
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
