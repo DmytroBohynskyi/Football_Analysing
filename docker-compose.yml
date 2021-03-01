@@ -21,3 +21,9 @@ services:
     restart: always
     ports:
       - 8080:8080
+
+  scrapinghub:
+    image: scrapinghub/splash
+    restart: always
+    ports:
+      - 8050:8050
