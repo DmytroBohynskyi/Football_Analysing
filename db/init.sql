@@ -2,7 +2,7 @@
 CREATE TABLE Countries
 (
     id    serial PRIMARY KEY,
-    label char(50) NOT NULL
+    label char(50) UNIQUE NOT NULL
 );
 
 INSERT INTO Countries (label)
@@ -13,8 +13,10 @@ VALUES ('poland'),
 ------------- League -------------
 CREATE TABLE League
 (
-    id    serial PRIMARY KEY,
-    label char(50) NOT NULL
+    id      serial PRIMARY KEY,
+    label   char(50) UNIQUE NOT NULL,
+    href    char(250) UNIQUE NOT NULL,
+    country integer references Countries (id)
 );
 ----------- END League -----------
 
@@ -22,16 +24,15 @@ CREATE TABLE League
 CREATE TABLE Seasons
 (
     id    serial PRIMARY KEY,
-    label char(50) NOT NULL
+    label char(50) UNIQUE NOT NULL
 );
 ----------- END Seasons -----------
 
 ------------- Clubs -------------
 CREATE TABLE Clubs
 (
-    id      serial PRIMARY KEY,
-    country integer references Countries (id),
-    name    char(50) NOT NULL
+    id   serial PRIMARY KEY,
+    name char(50) UNIQUE NOT NULL
 );
 ----------- END Clubs -----------
 
@@ -39,8 +40,8 @@ CREATE TABLE Clubs
 CREATE TABLE Result
 (
     id          serial PRIMARY KEY,
-    first_club  integer,
-    second_club integer
+    first_club  integer UNIQUE NOT NULL,
+    second_club integer NOT NULL
 );
 ----------- END Result -----------
 
@@ -50,6 +51,9 @@ CREATE TABLE Matches
     id          serial PRIMARY KEY,
     first_club  integer references Clubs (id),
     second_club integer references Clubs (id),
+    league_id   integer references League (id),
+    seasons_id  integer references Seasons (id),
+    result_id   integer references Result (id),
     match_day   date
 );
 ----------- END Matches -----------

@@ -3,3 +3,5 @@ requests~=2.24.0
 beautifulsoup4~=4.9.3
 scrapy~=2.4.1
 itemadapter~=0.2.0
+itemloaders~=1.0.4
+w3lib~=1.22.0

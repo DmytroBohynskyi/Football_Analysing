@@ -1,12 +1,15 @@
-# Define here the models for your scraped items
-#
-# See documentation in:
-# https://docs.scrapy.org/en/latest/topics/items.html
-
-import scrapy
+from scrapy import Field, Item
 
 
-class SoccerItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class SoccerItem(Item):
+    # define the fields:
+    season = Field()
+    league = Field()
+    country = Field()
+    result = Field()
+    date = Field()
+    first_club_name = Field()
+    second_club_name = Field()
+    title = Field()
+    clubs_name = Field()
+    url = Field()
