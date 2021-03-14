@@ -2,7 +2,7 @@ from typing import Iterator
 
 import scrapy
 from scrapy_splash import SplashRequest
-from soccer.items import SoccerItem
+from ..items import SoccerItem
 
 
 class SoccerSpider(scrapy.Spider):

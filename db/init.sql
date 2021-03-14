@@ -40,8 +40,9 @@ CREATE TABLE Clubs
 CREATE TABLE Result
 (
     id          serial PRIMARY KEY,
-    first_club  integer UNIQUE NOT NULL,
-    second_club integer NOT NULL
+    first_club  integer NOT NULL,
+    second_club integer NOT NULL,
+    title char(50) UNIQUE NOT NULL
 );
 ----------- END Result -----------
 

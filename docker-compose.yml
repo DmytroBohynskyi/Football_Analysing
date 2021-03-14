@@ -13,6 +13,7 @@ services:
       POSTGRES_PASSWORD: "${DB_password}"
       POSTGRES_DB: "${DB_database}"
     volumes:
+      - ./bd/data:/var/lib/postgresql/data # if you won't save data base or read
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 

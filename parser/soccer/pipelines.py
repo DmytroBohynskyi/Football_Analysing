@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 
 import psycopg2
-from soccer.items import SoccerItem
+from parser.items import SoccerItem
 
 
 class SoccerPipeline:
@@ -65,6 +65,7 @@ class SoccerPipeline:
         self.conn.close()
         self.cursor.close()
 
+
     def insert_new_row(self, value, table_name, column_name=None, key: list = None, key_name: list = None,
                        sql_query=None) -> int:
         """
@@ -95,6 +96,7 @@ class SoccerPipeline:
         finally:
             return id_of_row
 
+
     def insert_result(self, value: str, table_name, ) -> int:
         """
         This function creates SQL Query from value["result"] and sends it to data base.
@@ -110,12 +112,13 @@ class SoccerPipeline:
         except ValueError:
             first_value, second_value = [-1, -1]
         # Create query
-        sql_query: str = r"INSERT INTO result (first_club, second_club) " \
-                         f"VALUES ({first_value},{second_value}) " \
-                         f"ON CONFLICT (first_club) where second_club = {second_value} " \
-                         f"DO UPDATE SET first_club=EXCLUDED.first_club, second_club=EXCLUDED.second_club " \
+        sql_query: str = r"INSERT INTO result (first_club, second_club, title) " \
+                         f"VALUES ({first_value},{second_value},'{value}') " \
+                         f"ON CONFLICT (title) " \
+                         f"DO UPDATE SET first_club=EXCLUDED.first_club, second_club=EXCLUDED.second_club, title=EXCLUDED.title " \
                          f"RETURNING id;"
         return self.insert_new_row(str(value), table_name, sql_query=sql_query)
+
 
     def insert_matches(self, *args) -> None:
         """
@@ -127,6 +130,7 @@ class SoccerPipeline:
         sql_query: str = r"INSERT INTO matches (first_club, second_club, league_id, seasons_id, result_id, match_day) " \
                          "values (%s,%s,%s,%s,%s,'%s') on conflict do nothing;" % args
         self.insert(sql_query, cookies=False)
+
 
     def insert(self, sql_query, table_name=None, value=None, cookies=True):
         """
@@ -152,6 +156,7 @@ class SoccerPipeline:
             return id_of_new_row
 
         return None
+
 
     @staticmethod
     def string_to_date(value: str):
