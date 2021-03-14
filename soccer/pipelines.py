@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 
 import psycopg2
-from parser.items import SoccerItem
+from soccer.items import SoccerItem
 
 
 class SoccerPipeline:
